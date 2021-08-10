@@ -1,0 +1,91 @@
+<html>
+<!-- 원본 코드 제작자: springuser-->
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
+
+
+
+<title>묘야님만의 타이머 ♥</title>
+<style> 
+h1 {
+    color: white
+}
+body {
+  background-color: #ffcccc;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+</style>
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class = "container">
+<h1 align = "center" id = "show">숫자를 입력해주세요!</h1>
+<br>
+<div class="input-group mb-3">
+<input type="text" class="form-control" id="input_min" placeholder="분">
+<input type="text" class="form-control" id="input_sec" placeholder="초">
+<div class="input-group-append">
+<button class="btn btn-info" type="button" onclick = "TimerStart()">시작</button> 
+<button class = "btn btn-danger" type = "button" onclick = "stop()">중지</button>
+<button class = "btn btn-primary" type = "button" onclick = "three()">추가</button>
+
+</div>
+</div>
+<script>
+var SetTime = 5;
+var min;
+var sec;
+var audio = new Audio();
+audio.src = "./eofucu.mp3";
+
+function msg_time() {
+    SetTime--
+    m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";	
+    document.getElementById("show").innerHTML = m
+    if (SetTime < 0) {		
+        clearInterval(tid);		
+        audio.play();
+        document.getElementById("show").innerHTML = "끝! 다시 시작할려면 숫자를 입력해주세요! "
+    }
+    
+}
+
+function TimerStart(){ 
+    min = Number(document.getElementById("input_min").value);
+    sec = Number(document.getElementById("input_sec").value);
+    SetTime = min * 60 + sec;
+    tid = setInterval('msg_time() ', 1000) 
+    document.getElementById("input_min").value = ""
+    document.getElementById("input_sec").value = ""
+};
+
+function three(){
+    min = Number(document.getElementById("input_min").value);
+    sec = Number(document.getElementById("input_sec").value);
+    SetTime += min * 60 + sec;
+}
+
+function stop(){
+    clearInterval(tid);	
+    document.getElementById("show").innerHTML = "끝! 다시 시작할려면 숫자를 입력해주세요! "
+}
+
+
+
+//timer = setTimeout(time_goes(), )
+
+</script>
+</body>
+</html>
